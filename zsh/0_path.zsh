@@ -1,5 +1,5 @@
 # path, the 0 in the filename causes this to load first
-
+PATH=/opt/local/bin:$PATH
 pathAppend() {
   # Only adds to the path if it's not already there
   if ! echo $PATH | egrep -q "(^|:)$1($|:)" ; then
