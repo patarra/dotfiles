@@ -27,5 +27,3 @@ else
   end
 endif
 
-colorscheme solarized
-set background=dark

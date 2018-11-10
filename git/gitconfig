@@ -96,10 +96,15 @@
 [mergetool "mvimdiff"]
   cmd="mvim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
   keepbackup=false
+[difftool "Kaleidoscope"]
+    cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[mergetool "Kaleidoscope"]
+    cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+    trustExitCode = true
 [merge]
   summary = true
   verbosity = 1
-  tool = mvimdiff
+  tool = Kaleidoscope
 [apply]
   whitespace = nowarn
 [branch]
@@ -109,9 +114,9 @@
   # the usual default is to push all branches
   default = upstream
 [core]
-  autocrlf = false
-  editor = vim
-  excludesfile = ~/.yadr/git/gitignore
+	autocrlf = input
+	editor = "emacsclient -c -a= "
+	excludesfile = /Users/jmfelguera/.yadr/git/gitignore
 [advice]
   statusHints = false
 [diff]
@@ -125,3 +130,17 @@
   enabled = true
 [include]
   path = .gitconfig.user
+[user]
+	email = patarra@gmail.com
+	name = José Manuel Felguera
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
