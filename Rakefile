@@ -157,9 +157,8 @@ def install_ports
   puts "======================================================"
   puts "Installing macports packages..."
   puts "======================================================"
-  run %{sudo port install zsh ctags git hub tmux the_silver_searcher}
-  run %{sudo port install MacVim}
-  puts
+  run %{yay -S  zsh ctags git hub tmux the_silver_searcher}
+   puts
   puts
 end
 
